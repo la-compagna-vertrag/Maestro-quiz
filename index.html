@@ -24,18 +24,19 @@
     .subtitle { text-align: center; opacity: 0.9; margin-bottom: 30px; }
     
     .composer-image {
-      width: 180px;
-      height: 180px;
+      width: 100%;
+      max-width: 280px;
+      height: 220px;
       object-fit: cover;
-      border-radius: 50%;
-      border: 5px solid rgba(255,255,255,0.3);
+      border-radius: 16px;
+      border: 6px solid rgba(255,255,255,0.3);
       display: block;
-      margin: 15px auto;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+      margin: 15px auto 25px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     }
 
     .question {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       margin: 20px 0;
       text-align: center;
     }
@@ -45,7 +46,7 @@
       gap: 12px;
     }
     button {
-      padding: 15px;
+      padding: 16px;
       font-size: 1.1rem;
       border: none;
       border-radius: 12px;
@@ -55,22 +56,22 @@
       transition: all 0.3s;
     }
     button:hover {
-      background: rgba(255,255,255,0.3);
-      transform: translateX(10px);
+      background: rgba(255,255,255,0.35);
+      transform: translateX(8px);
     }
-    button.correct { background: #4ade80; }
-    button.wrong { background: #f87171; }
+    button.correct { background: #4ade80 !important; color: black; }
+    button.wrong { background: #f87171 !important; }
 
     .progress {
-      height: 8px;
+      height: 10px;
       background: rgba(255,255,255,0.3);
-      border-radius: 4px;
+      border-radius: 5px;
       margin: 20px 0;
     }
     .progress-bar {
       height: 100%;
       background: #60a5fa;
-      border-radius: 4px;
+      border-radius: 5px;
       width: 0%;
       transition: width 0.4s;
     }
@@ -99,7 +100,7 @@
       <div class="question" id="questionText"></div>
       <div class="options" id="options"></div>
       
-      <button onclick="nextQuestion()" id="nextBtn" class="hidden" style="margin-top:20px;">Nächste Frage →</button>
+      <button onclick="nextQuestion()" id="nextBtn" class="hidden" style="margin-top:20px; width:100%;">Nächste Frage →</button>
     </div>
 
     <div id="resultScreen" class="hidden">
@@ -115,16 +116,16 @@
 
   <script>
     const questions = [
-      { question: "Wer komponierte die 'Mondscheinsonate'?", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Beethoven.jpg/800px-Beethoven.jpg", options: ["Wolfgang Amadeus Mozart", "Ludwig van Beethoven", "Johann Sebastian Bach", "Frédéric Chopin"], correct: 1 },
-      { question: "Welcher Komponist wurde taub und komponierte trotzdem weiter?", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Beethoven.jpg/800px-Beethoven.jpg", options: ["Ludwig van Beethoven", "Johannes Brahms", "Franz Schubert", "Antonio Vivaldi"], correct: 0 },
-      { question: "Welches Werk stammt von Antonio Vivaldi?", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Antonio_Vivaldi.jpg/800px-Antonio_Vivaldi.jpg", options: ["Die Zauberflöte", "Die vier Jahreszeiten", "Eine kleine Nachtmusik", "Die Unvollendete"], correct: 1 },
-      { question: "In welcher Stadt wurde Wolfgang Amadeus Mozart geboren?", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Wolfgang-amadeus-mozart_1.jpg/800px-Wolfgang-amadeus-mozart_1.jpg", options: ["Wien", "Berlin", "Salzburg", "Paris"], correct: 2 },
-      { question: "Welcher Komponist ist bekannt für seine Polonaisen und Walzer?", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Frederic_Chopin_photo.jpeg/800px-Frederic_Chopin_photo.jpeg", options: ["Claude Debussy", "Frédéric Chopin", "Pyotr Tschaikowski", "George Gershwin"], correct: 1 },
-      { question: "Wer komponierte 'Also sprach Zarathustra'?", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Richard_Strauss.jpg/800px-Richard_Strauss.jpg", options: ["Richard Strauss", "Richard Wagner", "Gustav Mahler", "Hector Berlioz"], correct: 0 },
-      { question: "Wie viele Sinfonien schrieb Ludwig van Beethoven?", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Beethoven.jpg/800px-Beethoven.jpg", options: ["5", "7", "9", "11"], correct: 2 },
-      { question: "Welcher Komponist gilt als 'Vater der Sinfonie'?", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Joseph_Haydn.jpg/800px-Joseph_Haydn.jpg", options: ["Joseph Haydn", "Johann Sebastian Bach", "Georg Friedrich Händel", "Felix Mendelssohn"], correct: 0 },
-      { question: "Welches Instrument spielte Franz Liszt virtuos?", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Franz_Liszt.jpg/800px-Franz_Liszt.jpg", options: ["Geige", "Klavier", "Cello", "Flöte"], correct: 1 },
-      { question: "Wer komponierte den Hochzeitsmarsch aus 'Ein Sommernachtstraum'?", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Wolfgang-amadeus-mozart_1.jpg/800px-Wolfgang-amadeus-mozart_1.jpg", options: ["Robert Schumann", "Felix Mendelssohn Bartholdy", "Hector Berlioz", "Camille Saint-Saëns"], correct: 1 }
+      { question: "Wer komponierte die 'Mondscheinsonate'?", image: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Beethoven.jpg", options: ["Wolfgang Amadeus Mozart", "Ludwig van Beethoven", "Johann Sebastian Bach", "Frédéric Chopin"], correct: 1 },
+      { question: "Welcher Komponist wurde taub und komponierte trotzdem weiter?", image: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Beethoven.jpg", options: ["Ludwig van Beethoven", "Johannes Brahms", "Franz Schubert", "Antonio Vivaldi"], correct: 0 },
+      { question: "Welches Werk stammt von Antonio Vivaldi?", image: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Antonio_Vivaldi.jpg", options: ["Die Zauberflöte", "Die vier Jahreszeiten", "Eine kleine Nachtmusik", "Die Unvollendete"], correct: 1 },
+      { question: "In welcher Stadt wurde Wolfgang Amadeus Mozart geboren?", image: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Wolfgang-amadeus-mozart_1.jpg", options: ["Wien", "Berlin", "Salzburg", "Paris"], correct: 2 },
+      { question: "Welcher Komponist ist bekannt für seine Polonaisen und Walzer?", image: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Frederic_Chopin_photo.jpeg", options: ["Claude Debussy", "Frédéric Chopin", "Pyotr Tschaikowski", "George Gershwin"], correct: 1 },
+      { question: "Wer komponierte 'Also sprach Zarathustra'?", image: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Richard_Strauss.jpg", options: ["Richard Strauss", "Richard Wagner", "Gustav Mahler", "Hector Berlioz"], correct: 0 },
+      { question: "Wie viele Sinfonien schrieb Ludwig van Beethoven?", image: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Beethoven.jpg", options: ["5", "7", "9", "11"], correct: 2 },
+      { question: "Welcher Komponist gilt als 'Vater der Sinfonie'?", image: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Joseph_Haydn.jpg", options: ["Joseph Haydn", "Johann Sebastian Bach", "Georg Friedrich Händel", "Felix Mendelssohn"], correct: 0 },
+      { question: "Welches Instrument spielte Franz Liszt virtuos?", image: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Franz_Liszt.jpg", options: ["Geige", "Klavier", "Cello", "Flöte"], correct: 1 },
+      { question: "Wer komponierte den Hochzeitsmarsch?", image: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Wolfgang-amadeus-mozart_1.jpg", options: ["Robert Schumann", "Felix Mendelssohn Bartholdy", "Hector Berlioz", "Camille Saint-Saëns"], correct: 1 }
     ];
 
     let currentQuestion = 0;
