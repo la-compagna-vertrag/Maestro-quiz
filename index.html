@@ -3,56 +3,163 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Komponisten Quiz - Wie gut kennst du die Klassik?</title>
+  <title>Komponisten Quiz</title>
 
   <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: white;
-      margin: 0;
-      padding: 20px;
+    :root {
+      --bg1: #102a5c;
+      --bg2: #2857a3;
+      --card: rgba(255,255,255,0.12);
+      --card-strong: rgba(255,255,255,0.18);
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.78);
+      --blue: #60a5fa;
+      --blue-strong: #3b82f6;
+      --green: #4ade80;
+      --red: #f87171;
+      --gold: #facc15;
     }
 
-    .container {
-      max-width: 720px;
-      margin: 40px auto;
-      background: rgba(255,255,255,0.1);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.12), transparent 30%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--text);
+      margin: 0;
+      padding: 24px;
+      min-height: 100vh;
+    }
+
+    .app {
+      max-width: 780px;
+      margin: 30px auto;
+      background: var(--card);
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+      backdrop-filter: blur(6px);
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 10px;
+      font-size: 2.4rem;
+      margin: 0 0 10px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
     }
 
     .subtitle {
       text-align: center;
-      opacity: 0.9;
-      margin-bottom: 30px;
+      color: var(--muted);
+      margin-bottom: 28px;
+      line-height: 1.5;
     }
 
-   .composer-image {
-  width: 100%;
-  max-width: 420px;
-  height: 360px;
-  object-fit: contain;
-  border-radius: 16px;
-  border: 6px solid rgba(255,255,255,0.4);
-  display: block;
-  margin: 20px auto 30px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-  background: rgba(0,0,0,0.25);
-  padding: 8px;
-  box-sizing: border-box;
+    .badge {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      color: white;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .intro-card {
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 22px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .mini-card {
+      background: rgba(0,0,0,0.14);
+      border-radius: 16px;
+      padding: 16px 12px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .mini-card strong {
+      display: block;
+      color: white;
+      font-size: 1.15rem;
+      margin-bottom: 5px;
+    }
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .progress {
+      height: 11px;
+      background: rgba(255,255,255,0.28);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 16px 0 20px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--gold));
+      border-radius: 999px;
+      width: 0%;
+      transition: width 0.35s ease;
+    }
+
+    .composer-image {
+      width: 100%;
+      max-width: 430px;
+      height: 360px;
+      object-fit: contain;
+      border-radius: 20px;
+      border: 6px solid rgba(255,255,255,0.42);
+      display: block;
+      margin: 20px auto 18px;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.45);
+      background: rgba(0,0,0,0.25);
+      padding: 8px;
+    }
+
+    .image-error {
+      text-align: center;
+      color: #fecaca;
+      font-size: 0.95rem;
+      margin-bottom: 14px;
     }
 
     .question {
-      font-size: 1.35rem;
-      margin: 20px 0 25px;
+      font-size: 1.45rem;
+      margin: 26px 0 22px;
       text-align: center;
+      line-height: 1.35;
+      font-weight: 650;
     }
 
     .options {
@@ -62,112 +169,203 @@
     }
 
     button {
-      padding: 16px;
-      font-size: 1.1rem;
+      padding: 16px 18px;
+      font-size: 1.08rem;
       border: none;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.2);
+      border-radius: 15px;
+      background: rgba(255,255,255,0.22);
       color: white;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
     }
 
-    button:hover {
-      background: rgba(255,255,255,0.35);
-      transform: translateX(8px);
+    button:hover:not(:disabled) {
+      background: rgba(255,255,255,0.34);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.18);
     }
 
     button:disabled {
       cursor: default;
-      opacity: 0.9;
+    }
+
+    .primary-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-top: 16px;
+    }
+
+    .secondary-btn {
+      width: 100%;
+      background: rgba(255,255,255,0.16);
+      margin-top: 12px;
     }
 
     button.correct {
-      background: #4ade80 !important;
-      color: black;
+      background: var(--green) !important;
+      color: #052e16;
+      font-weight: 700;
     }
 
     button.wrong {
-      background: #f87171 !important;
-      color: black;
+      background: var(--red) !important;
+      color: #450a0a;
+      font-weight: 700;
     }
 
-    .progress {
-      height: 10px;
-      background: rgba(255,255,255,0.3);
-      border-radius: 5px;
-      margin: 20px 0;
-      overflow: hidden;
+    .feedback {
+      text-align: center;
+      margin: 18px 0 4px;
+      min-height: 28px;
+      font-size: 1.1rem;
+      font-weight: 650;
     }
 
-    .progress-bar {
-      height: 100%;
-      background: #60a5fa;
-      border-radius: 5px;
-      width: 0%;
-      transition: width 0.4s;
+    .result-box {
+      background: rgba(255,255,255,0.10);
+      border-radius: 22px;
+      padding: 24px;
+      text-align: center;
+      margin: 22px 0;
+    }
+
+    .score-big {
+      font-size: 3rem;
+      font-weight: 800;
+      margin: 10px 0;
+      color: var(--gold);
+    }
+
+    .result-comment {
+      font-size: 1.25rem;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+
+    .level-note {
+      margin-top: 24px;
+      padding: 16px;
+      background: rgba(0,0,0,0.14);
+      border-radius: 16px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.45;
     }
 
     .hidden {
       display: none;
     }
 
-    .result {
-      font-size: 2rem;
-      text-align: center;
-      margin: 30px 0;
-    }
+    @media (max-width: 640px) {
+      body {
+        padding: 12px;
+      }
 
-    .error-message {
-      text-align: center;
-      color: #fecaca;
-      font-size: 0.95rem;
-      margin-top: -15px;
-      margin-bottom: 20px;
+      .app {
+        margin: 10px auto;
+        padding: 22px;
+        border-radius: 22px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .intro-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .composer-image {
+        height: 300px;
+        max-width: 100%;
+      }
+
+      .question {
+        font-size: 1.25rem;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <main class="app">
     <h1>🎼 Komponisten Quiz</h1>
-    <p class="subtitle">Wie gut kennst du die großen Meister der Klassik?</p>
+    <p class="subtitle">Teste dein Wissen über die grossen Meister der Musikgeschichte.</p>
 
-    <div id="startScreen">
-      <button onclick="startQuiz()" style="font-size:1.4rem; padding:20px 40px; width:100%; background:#3b82f6;">
-        Quiz starten
-      </button>
-    </div>
+    <section id="startScreen">
+      <div class="center">
+        <span class="badge">Level 1</span>
+        <h2>Die grossen Klassiker</h2>
+      </div>
 
-    <div id="quizScreen" class="hidden">
+      <div class="intro-card">
+        <p class="subtitle" style="margin-bottom:0;">
+          10 Fragen, 4 Antworten, ein bisschen Ruhm — und vielleicht ein kleiner Maestro-Moment.
+        </p>
+
+        <div class="intro-grid">
+          <div class="mini-card">
+            <strong>10</strong>
+            Fragen
+          </div>
+          <div class="mini-card">
+            <strong>4</strong>
+            Antworten
+          </div>
+          <div class="mini-card">
+            <strong>1</strong>
+            richtige Lösung
+          </div>
+        </div>
+      </div>
+
+      <button class="primary-btn" onclick="startQuiz()">Level 1 starten</button>
+
+      <div class="level-note">
+        Weitere Level folgen später: Oper, Barock, Romantik, Moderne und ein richtig fieses Boss-Level.
+      </div>
+    </section>
+
+    <section id="quizScreen" class="hidden">
+      <div class="top-row">
+        <span class="badge">Level 1</span>
+        <strong>Frage <span id="currentQuestion">1</span>/<span id="totalQuestions">10</span></strong>
+      </div>
+
       <div class="progress">
         <div class="progress-bar" id="progress"></div>
       </div>
 
-      <p>
-        <strong>Frage <span id="currentQuestion">1</span>/<span id="totalQuestions">10</span></strong>
-      </p>
-
       <img id="composerImage" class="composer-image" src="" alt="Komponist">
-      <div id="imageError" class="error-message hidden"></div>
+      <div id="imageError" class="image-error hidden"></div>
 
       <div class="question" id="questionText"></div>
       <div class="options" id="options"></div>
 
-      <button onclick="nextQuestion()" id="nextBtn" class="hidden" style="margin-top:20px; width:100%;">
+      <div class="feedback" id="feedback"></div>
+
+      <button onclick="nextQuestion()" id="nextBtn" class="primary-btn hidden">
         Nächste Frage →
       </button>
-    </div>
+    </section>
 
-    <div id="resultScreen" class="hidden">
-      <h2 style="text-align:center;">Dein Ergebnis</h2>
-      <div class="result" id="scoreText"></div>
-      <p id="comment" style="font-size:1.3rem; margin:25px 0; text-align:center;"></p>
-      <button onclick="restartQuiz()" style="padding:15px 30px; font-size:1.1rem; width:100%;">
-        Quiz neu starten
-      </button>
-    </div>
-  </div>
+    <section id="resultScreen" class="hidden">
+      <div class="center">
+        <span class="badge">Level 1 abgeschlossen</span>
+        <h2>Dein Ergebnis</h2>
+      </div>
+
+      <div class="result-box">
+        <div class="score-big" id="scoreText"></div>
+        <p class="result-comment" id="comment"></p>
+      </div>
+
+      <button onclick="restartQuiz()" class="primary-btn">Noch einmal spielen</button>
+      <button onclick="backToStart()" class="secondary-btn">Zurück zur Startseite</button>
+    </section>
+  </main>
 
   <script>
     const questions = [
@@ -178,7 +376,7 @@
         correct: 1
       },
       {
-        question: "Welcher Komponist wurde taub?",
+        question: "Welcher Komponist wurde im Laufe seines Lebens zunehmend taub?",
         image: "beethoven.jpg",
         options: ["Beethoven", "Brahms", "Schubert", "Vivaldi"],
         correct: 0
@@ -196,7 +394,7 @@
         correct: 2
       },
       {
-        question: "Welcher Komponist ist bekannt für Walzer und Polonaisen?",
+        question: "Welcher Komponist ist besonders bekannt für Nocturnes, Mazurken und Polonaisen?",
         image: "chopin.jpg",
         options: ["Debussy", "Chopin", "Tschaikowsky", "Gershwin"],
         correct: 1
@@ -214,7 +412,7 @@
         correct: 2
       },
       {
-        question: "Wer gilt als 'Vater der Sinfonie'?",
+        question: "Wer gilt oft als 'Vater der Sinfonie'?",
         image: "jhaydn.jpg",
         options: ["Joseph Haydn", "Bach", "Händel", "Mendelssohn"],
         correct: 0
@@ -226,7 +424,7 @@
         correct: 1
       },
       {
-        question: "Wer komponierte den Hochzeitsmarsch?",
+        question: "Wer komponierte den berühmten Hochzeitsmarsch aus 'Ein Sommernachtstraum'?",
         image: "mendelssohn.jpg",
         options: ["Schumann", "Mendelssohn", "Berlioz", "Saint-Saëns"],
         correct: 1
@@ -235,6 +433,7 @@
 
     let currentQuestion = 0;
     let score = 0;
+    let answered = false;
 
     document.getElementById("totalQuestions").textContent = questions.length;
 
@@ -245,15 +444,18 @@
 
       currentQuestion = 0;
       score = 0;
+      answered = false;
 
       showQuestion();
     }
 
     function showQuestion() {
       const q = questions[currentQuestion];
+      answered = false;
 
       document.getElementById("questionText").textContent = q.question;
       document.getElementById("currentQuestion").textContent = currentQuestion + 1;
+      document.getElementById("feedback").textContent = "";
 
       const imageError = document.getElementById("imageError");
       imageError.classList.add("hidden");
@@ -264,7 +466,6 @@
       img.alt = "Bild: " + q.image;
 
       img.onerror = function() {
-        console.error("Bild nicht gefunden:", q.image);
         imageError.textContent = "Bild nicht gefunden: " + q.image;
         imageError.classList.remove("hidden");
       };
@@ -290,8 +491,13 @@
     }
 
     function selectAnswer(index, button) {
+      if (answered) return;
+
+      answered = true;
+
       const correctIndex = questions[currentQuestion].correct;
       const buttons = document.querySelectorAll(".options button");
+      const feedback = document.getElementById("feedback");
 
       buttons.forEach(btn => {
         btn.disabled = true;
@@ -300,9 +506,11 @@
       if (index === correctIndex) {
         button.classList.add("correct");
         score++;
+        feedback.textContent = "Richtig! Sehr schön. 🎉";
       } else {
         button.classList.add("wrong");
         buttons[correctIndex].classList.add("correct");
+        feedback.textContent = "Fast — die grüne Antwort wäre richtig gewesen.";
       }
 
       document.getElementById("nextBtn").classList.remove("hidden");
@@ -324,26 +532,33 @@
 
       const percentage = Math.round((score / questions.length) * 100);
 
+      document.getElementById("scoreText").textContent = score + "/" + questions.length;
+
       let comment = "";
 
-      if (percentage >= 90) {
-        comment = "🎉 Du bist ein echter Klassik-Experte!";
-      } else if (percentage >= 70) {
-        comment = "Sehr gut! Du kennst dich richtig aus.";
-      } else if (percentage >= 50) {
-        comment = "Nicht schlecht!";
+      if (percentage === 100) {
+        comment = "Perfekt! Du bist heute eindeutig im Maestro-Modus. 🏆";
+      } else if (percentage >= 80) {
+        comment = "Stark! Das ist schon richtig sattelfestes Klassik-Wissen.";
+      } else if (percentage >= 60) {
+        comment = "Sehr ordentlich! Da ist musikalisch schon einiges vorhanden.";
+      } else if (percentage >= 40) {
+        comment = "Solider Anfang. Noch ein paar Komponistenporträts anschauen, dann wird das.";
       } else {
-        comment = "Mehr Klassik hören empfohlen 😊";
+        comment = "Da wartet noch ein kleines Klassik-Abenteuer auf dich. Aber hey: genau dafür ist das Quiz da.";
       }
 
-      document.getElementById("scoreText").innerHTML =
-        `Du hast <strong>${score}/${questions.length}</strong> richtig! (${percentage}%)`;
-
-      document.getElementById("comment").textContent = comment;
+      document.getElementById("comment").textContent =
+        comment + " Du hast " + percentage + "% erreicht.";
     }
 
     function restartQuiz() {
+      startQuiz();
+    }
+
+    function backToStart() {
       document.getElementById("resultScreen").classList.add("hidden");
+      document.getElementById("quizScreen").classList.add("hidden");
       document.getElementById("startScreen").classList.remove("hidden");
     }
   </script>
