@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Komponisten Quiz - Wie gut kennst du die Klassik?</title>
+  <title>Komponisten Quiz</title>
   <style>
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
@@ -25,17 +25,17 @@
     
     .composer-image {
       width: 100%;
-      max-width: 340px;
-      height: 260px;
+      max-width: 360px;
+      height: 280px;
       object-fit: cover;
       border-radius: 16px;
-      border: 6px solid rgba(255,255,255,0.4);
+      border: 8px solid rgba(255,255,255,0.4);
       display: block;
       margin: 20px auto 30px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
 
-    .question { font-size: 1.35rem; margin: 20px 0 25px; text-align: center; }
+    .question { font-size: 1.4rem; margin: 20px 0 25px; text-align: center; }
     .options { display: flex; flex-direction: column; gap: 12px; }
     button {
       padding: 16px;
@@ -45,9 +45,8 @@
       background: rgba(255,255,255,0.2);
       color: white;
       cursor: pointer;
-      transition: all 0.3s;
     }
-    button:hover { background: rgba(255,255,255,0.35); transform: translateX(8px); }
+    button:hover { background: rgba(255,255,255,0.35); }
     button.correct { background: #4ade80 !important; color: black; }
     button.wrong { background: #f87171 !important; }
 
@@ -158,10 +157,8 @@
       document.getElementById('resultScreen').classList.remove('hidden');
 
       const percentage = Math.round((score / questions.length) * 100);
-      let comment = percentage >= 80 ? "🎉 Sehr gut! Du bist ein Klassik-Kenner!" : "Nicht schlecht! Weiter so 😊";
-
-      document.getElementById('scoreText').innerHTML = `Du hast <strong>${score}/${questions.length}</strong> richtig! (${percentage}%)`;
-      document.getElementById('comment').textContent = comment;
+      document.getElementById('scoreText').innerHTML = `Du hast <strong>${score}/5</strong> richtig! (${percentage}%)`;
+      document.getElementById('comment').textContent = percentage >= 80 ? "🎉 Sehr gut!" : "Mehr Klassik hören empfohlen!";
     }
 
     function restartQuiz() {
