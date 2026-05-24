@@ -323,7 +323,7 @@
 
       <div class="level-grid" id="levelGrid"></div>
 
-      <p class="version">Version 3.0 – Level-System</p>
+      <p class="version">Version 3.1 – zufällige Fragenreihenfolge</p>
     </section>
 
     <section id="quizScreen" class="hidden">
@@ -509,75 +509,75 @@
           }
         ]
       },
-        {
-  id: 3,
-  title: "Epochen & Stil",
-  description: "Barock, Klassik, Romantik, Moderne: erkennst du die Zusammenhänge?",
-  active: true,
-  questions: [
-    {
-      question: "Johann Sebastian Bach gehört hauptsächlich zu welcher Epoche?",
-      image: "bach.jpg",
-      options: ["Renaissance", "Barock", "Klassik", "Romantik"],
-      correct: 1
-    },
-    {
-      question: "Wolfgang Amadeus Mozart ist ein zentraler Komponist welcher Epoche?",
-      image: "mozart.jpg",
-      options: ["Barock", "Wiener Klassik", "Impressionismus", "Moderne"],
-      correct: 1
-    },
-    {
-      question: "Frédéric Chopin wird vor allem welcher Epoche zugeordnet?",
-      image: "chopin.jpg",
-      options: ["Renaissance", "Barock", "Romantik", "Avantgarde"],
-      correct: 2
-    },
-    {
-      question: "Claude Debussy wird besonders mit welcher Stilrichtung verbunden?",
-      image: "debussy.jpg",
-      options: ["Impressionismus", "Wiener Klassik", "Renaissance", "Minimal Music"],
-      correct: 0
-    },
-    {
-      question: "Arnold Schönberg ist eng verbunden mit welcher musikalischen Entwicklung?",
-      image: "schoenberg.jpg",
-      options: ["Generalbass", "Sonatenhauptsatzform", "Zwölftontechnik", "Gregorianik"],
-      correct: 2
-    },
-    {
-      question: "Giovanni Pierluigi da Palestrina steht besonders für welche Epoche?",
-      image: "palestrina.jpg",
-      options: ["Renaissance", "Romantik", "Expressionismus", "Klassik"],
-      correct: 0
-    },
-    {
-      question: "Claudio Monteverdi steht musikgeschichtlich besonders an der Schwelle zwischen ...",
-      image: "monteverdi.jpg",
-      options: ["Mittelalter und Renaissance", "Renaissance und Barock", "Klassik und Romantik", "Romantik und Moderne"],
-      correct: 1
-    },
-    {
-      question: "Igor Strawinsky gehört vor allem zur Musik welcher Zeit?",
-      image: "stravinsky.jpg",
-      options: ["Barock", "Wiener Klassik", "20. Jahrhundert / Moderne", "Renaissance"],
-      correct: 2
-    },
-    {
-      question: "Joseph Haydn gilt als wichtiger Vertreter welcher Epoche?",
-      image: "jhaydn.jpg",
-      options: ["Wiener Klassik", "Impressionismus", "Spätromantik", "Renaissance"],
-      correct: 0
-    },
-    {
-      question: "John Cage wird besonders mit welcher Richtung verbunden?",
-      image: "cage.jpg",
-      options: ["Kirchenmusik der Renaissance", "Experimentelle Musik / Avantgarde", "Frühbarocke Oper", "Wiener Klassik"],
-      correct: 1
-    }
-  ]
-},
-       {
+      {
+        id: 3,
+        title: "Epochen & Stil",
+        description: "Barock, Klassik, Romantik, Moderne: erkennst du die Zusammenhänge?",
+        active: true,
+        questions: [
+          {
+            question: "Johann Sebastian Bach gehört hauptsächlich zu welcher Epoche?",
+            image: "bach.jpg",
+            options: ["Renaissance", "Barock", "Klassik", "Romantik"],
+            correct: 1
+          },
+          {
+            question: "Wolfgang Amadeus Mozart ist ein zentraler Komponist welcher Epoche?",
+            image: "mozart.jpg",
+            options: ["Barock", "Wiener Klassik", "Impressionismus", "Moderne"],
+            correct: 1
+          },
+          {
+            question: "Frédéric Chopin wird vor allem welcher Epoche zugeordnet?",
+            image: "chopin.jpg",
+            options: ["Renaissance", "Barock", "Romantik", "Avantgarde"],
+            correct: 2
+          },
+          {
+            question: "Claude Debussy wird besonders mit welcher Stilrichtung verbunden?",
+            image: "debussy.jpg",
+            options: ["Impressionismus", "Wiener Klassik", "Renaissance", "Minimal Music"],
+            correct: 0
+          },
+          {
+            question: "Arnold Schönberg ist eng verbunden mit welcher musikalischen Entwicklung?",
+            image: "schoenberg.jpg",
+            options: ["Generalbass", "Sonatenhauptsatzform", "Zwölftontechnik", "Gregorianik"],
+            correct: 2
+          },
+          {
+            question: "Giovanni Pierluigi da Palestrina steht besonders für welche Epoche?",
+            image: "palestrina.jpg",
+            options: ["Renaissance", "Romantik", "Expressionismus", "Klassik"],
+            correct: 0
+          },
+          {
+            question: "Claudio Monteverdi steht musikgeschichtlich besonders an der Schwelle zwischen ...",
+            image: "monteverdi.jpg",
+            options: ["Mittelalter und Renaissance", "Renaissance und Barock", "Klassik und Romantik", "Romantik und Moderne"],
+            correct: 1
+          },
+          {
+            question: "Igor Strawinsky gehört vor allem zur Musik welcher Zeit?",
+            image: "stravinsky.jpg",
+            options: ["Barock", "Wiener Klassik", "20. Jahrhundert / Moderne", "Renaissance"],
+            correct: 2
+          },
+          {
+            question: "Joseph Haydn gilt als wichtiger Vertreter welcher Epoche?",
+            image: "jhaydn.jpg",
+            options: ["Wiener Klassik", "Impressionismus", "Spätromantik", "Renaissance"],
+            correct: 0
+          },
+          {
+            question: "John Cage wird besonders mit welcher Richtung verbunden?",
+            image: "cage.jpg",
+            options: ["Kirchenmusik der Renaissance", "Experimentelle Musik / Avantgarde", "Frühbarocke Oper", "Wiener Klassik"],
+            correct: 1
+          }
+        ]
+      },
+      {
         id: 4,
         title: "Oper & Musiktheater",
         description: "Von Mozart bis Puccini: Bühne frei.",
@@ -632,6 +632,20 @@
     let currentQuestion = 0;
     let score = 0;
     let answered = false;
+    let currentLevelQuestions = [];
+
+    function shuffleArray(array) {
+      const shuffled = [...array];
+
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        const temp = shuffled[i];
+        shuffled[i] = shuffled[randomIndex];
+        shuffled[randomIndex] = temp;
+      }
+
+      return shuffled;
+    }
 
     function renderLevelScreen() {
       const grid = document.getElementById("levelGrid");
@@ -642,7 +656,7 @@
         card.className = "level-card" + (level.active ? "" : " locked");
 
         const best = localStorage.getItem("bestScoreLevel" + level.id);
-        const bestText = best ? `<div class="best-score">Beste Punktzahl: ${best}/10</div>` : "";
+        const bestText = best ? `<div class="best-score">Beste Punktzahl: ${best}/${level.questions.length}</div>` : "";
 
         card.innerHTML = `
           <div>
@@ -671,20 +685,21 @@
 
       const level = levels[currentLevelIndex];
 
+      currentLevelQuestions = shuffleArray(level.questions);
+
       document.getElementById("levelScreen").classList.add("hidden");
       document.getElementById("resultScreen").classList.add("hidden");
       document.getElementById("quizScreen").classList.remove("hidden");
 
       document.getElementById("levelBadge").textContent = "Level " + level.id;
       document.getElementById("levelTitle").textContent = level.title;
-      document.getElementById("totalQuestions").textContent = level.questions.length;
+      document.getElementById("totalQuestions").textContent = currentLevelQuestions.length;
 
       showQuestion();
     }
 
     function showQuestion() {
-      const level = levels[currentLevelIndex];
-      const q = level.questions[currentQuestion];
+      const q = currentLevelQuestions[currentQuestion];
 
       answered = false;
 
@@ -709,7 +724,7 @@
         imageError.classList.add("hidden");
       };
 
-      const progress = ((currentQuestion + 1) / level.questions.length) * 100;
+      const progress = ((currentQuestion + 1) / currentLevelQuestions.length) * 100;
       document.getElementById("progress").style.width = progress + "%";
 
       const optionsDiv = document.getElementById("options");
@@ -730,8 +745,8 @@
 
       answered = true;
 
-      const level = levels[currentLevelIndex];
-      const correctIndex = level.questions[currentQuestion].correct;
+      const q = currentLevelQuestions[currentQuestion];
+      const correctIndex = q.correct;
       const buttons = document.querySelectorAll(".options button");
       const feedback = document.getElementById("feedback");
 
@@ -753,11 +768,9 @@
     }
 
     function nextQuestion() {
-      const level = levels[currentLevelIndex];
-
       currentQuestion++;
 
-      if (currentQuestion < level.questions.length) {
+      if (currentQuestion < currentLevelQuestions.length) {
         showQuestion();
       } else {
         showResult();
@@ -773,9 +786,9 @@
       document.getElementById("resultLevelBadge").textContent = "Level " + level.id + " abgeschlossen";
       document.getElementById("resultTitle").textContent = level.title;
 
-      const percentage = Math.round((score / level.questions.length) * 100);
+      const percentage = Math.round((score / currentLevelQuestions.length) * 100);
 
-      document.getElementById("scoreText").textContent = score + "/" + level.questions.length;
+      document.getElementById("scoreText").textContent = score + "/" + currentLevelQuestions.length;
 
       const storageKey = "bestScoreLevel" + level.id;
       const oldBest = Number(localStorage.getItem(storageKey) || 0);
