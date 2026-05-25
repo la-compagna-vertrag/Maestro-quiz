@@ -347,7 +347,7 @@
   Bestnoten zurücksetzen
 </button>
 
-<p class="version">Version 8.1 – Kirchenmusik redaktionell verbessert</p>
+<p class="version">Version 9.0 – Formen, Gattungen & Begriffe aktiviert</p>
 </section>
 
 <section id="quizScreen" class="hidden">
@@ -1022,12 +1022,83 @@
   ]
 },      
       {
-        id: 9,
-        title: "Formen, Gattungen, Begriffe",
-        description: "Für angehende Musikstudierende und Neugierige.",
-        active: false,
-        questions: []
-      },
+  id: 9,
+  title: "Formen, Gattungen & Begriffe",
+  description: "Sonate, Sinfonie, Fuge, Variation, Konzert und mehr.",
+  active: true,
+  questions: [
+    {
+      question: "Welche Gattung ist typischerweise ein mehrsätziges Werk für Orchester?",
+      image: "beethoven.jpg",
+      options: ["Sinfonie", "Nocturne", "Motette", "Arie"],
+      correct: 0,
+      explanation: "Die Sinfonie ist in der Klassik und Romantik meist ein mehrsätziges Werk für Orchester. Typisch sind vier Sätze mit unterschiedlichen Charakteren und Tempi."
+    },
+    {
+      question: "Was bezeichnet eine Sonate im klassischen Sinn meistens?",
+      image: "mozart.jpg",
+      options: ["Ein mehrsätziges Instrumentalwerk", "Ein geistliches Chorwerk", "Eine Opernszene", "Ein Tanzlied"],
+      correct: 0,
+      explanation: "Eine Sonate ist meist ein mehrsätziges Instrumentalwerk, zum Beispiel für Klavier solo oder für ein Melodieinstrument mit Klavier. Die Sonate wurde besonders in Klassik und Romantik wichtig."
+    },
+    {
+      question: "Welche Form arbeitet besonders mit einem Thema, das nacheinander in verschiedenen Stimmen einsetzt?",
+      image: "bach.jpg",
+      options: ["Fuge", "Walzer", "Nocturne", "Ouvertüre"],
+      correct: 0,
+      explanation: "In einer Fuge wird ein Thema nacheinander von verschiedenen Stimmen aufgegriffen und kontrapunktisch verarbeitet. Johann Sebastian Bach gilt als einer der grössten Meister dieser Form."
+    },
+    {
+      question: "Was ist eine Variation?",
+      image: "brahms.jpg",
+      options: ["Eine veränderte Wiederholung eines Themas", "Ein Opernrezitativ", "Ein reines Schlagzeugstück", "Ein liturgischer Messteil"],
+      correct: 0,
+      explanation: "Bei Variationen wird ein Thema mehrfach wiederholt, aber jeweils verändert. Verändert werden können Melodie, Rhythmus, Harmonie, Tempo, Begleitung oder Charakter."
+    },
+    {
+      question: "Was ist ein Konzert im klassischen Sinn?",
+      image: "vivaldi.jpg",
+      options: ["Ein Werk mit solistischem Instrument und Orchester", "Ein Werk nur für Chor", "Eine Oper ohne Handlung", "Eine reine Tanzfolge"],
+      correct: 0,
+      explanation: "Ein Konzert stellt meist ein oder mehrere Soloinstrumente dem Orchester gegenüber. Besonders bekannt sind Klavierkonzerte, Violinkonzerte und die barocken Solokonzerte Vivaldis."
+    },
+    {
+      question: "Was meint 'Concerto grosso'?",
+      image: "corelli.jpg",
+      options: ["Ein barockes Konzert mit kleiner Solistengruppe und Orchester", "Eine romantische Klaviersonate", "Eine geistliche Messe", "Ein Opernfinale"],
+      correct: 0,
+      explanation: "Im Concerto grosso steht eine kleine Solistengruppe, das Concertino, einem grösseren Ensemble gegenüber. Diese Gattung ist typisch für den Barock."
+    },
+    {
+      question: "Welche Gattung ist eine Folge von Tänzen oder tanzartigen Sätzen?",
+      image: "handel.jpg",
+      options: ["Suite", "Sinfonische Dichtung", "Requiem", "Kanon"],
+      correct: 0,
+      explanation: "Eine Suite besteht aus mehreren Tänzen oder tanzartigen Sätzen. Im Barock finden sich häufig Sätze wie Allemande, Courante, Sarabande und Gigue."
+    },
+    {
+      question: "Was ist eine Ouvertüre?",
+      image: "rossini.jpg",
+      options: ["Ein eröffnendes Instrumentalstück", "Ein Schlusschor", "Ein geistliches Gemeindelied", "Eine Klavieretüde"],
+      correct: 0,
+      explanation: "Eine Ouvertüre ist ein eröffnendes Instrumentalstück, oft zu einer Oper, einem Oratorium oder einem Schauspiel. Manche Ouvertüren wurden später auch als Konzertstücke beliebt."
+    },
+    {
+      question: "Was ist der Unterschied zwischen Rezitativ und Arie in der Oper?",
+      image: "mozart.jpg",
+      options: ["Das Rezitativ treibt die Handlung voran, die Arie verweilt stärker im Ausdruck", "Die Arie ist immer gesprochen", "Das Rezitativ ist immer rein instrumental", "Es gibt keinen Unterschied"],
+      correct: 0,
+      explanation: "Das Rezitativ ist oft sprachähnlicher und bringt die Handlung voran. Die Arie ist meist melodischer ausgeformt und gibt einer Figur Raum für Gefühl, Reflexion oder virtuosen Ausdruck."
+    },
+    {
+      question: "Was ist eine sinfonische Dichtung?",
+      image: "liszt.jpg?v=3",
+      options: ["Ein einsätziges Orchesterwerk mit aussermusikalischem Programm", "Eine Messe für Chor", "Eine barocke Tanzsuite", "Ein Klavierlied ohne Text"],
+      correct: 0,
+      explanation: "Die sinfonische Dichtung ist ein meist einsätziges Orchesterwerk mit einem literarischen, bildlichen oder philosophischen Programm. Franz Liszt prägte diese Gattung im 19. Jahrhundert besonders stark."
+    }
+  ]
+},
       {
         id: 10,
         title: "Boss-Level",
