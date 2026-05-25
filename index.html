@@ -347,7 +347,7 @@
   Bestnoten zurücksetzen
 </button>
 
-<p class="version">Version 9.0 – Formen, Gattungen & Begriffe aktiviert</p>
+<p class="version">Version 10.0 – Boss-Level aktiviert</p>
 </section>
 
 <section id="quizScreen" class="hidden">
@@ -1099,13 +1099,84 @@
     }
   ]
 },
-      {
-        id: 10,
-        title: "Boss-Level",
-        description: "Fies, aber fair. Für echte Musikgeschichte-Nerds.",
-        active: false,
-        questions: []
-      }
+     {
+  id: 10,
+  title: "Boss-Level",
+  description: "Fies, aber fair. Die grosse Mischung aus Werken, Epochen, Gattungen und Stil.",
+  active: true,
+  questions: [
+    {
+      question: "Welcher Komponist steht besonders am Übergang von Renaissance zu Barock und ist für die frühe Oper wichtig?",
+      image: "monteverdi.jpg",
+      options: ["Claudio Monteverdi", "Giovanni Pierluigi da Palestrina", "Joseph Haydn", "Frédéric Chopin"],
+      correct: 0,
+      explanation: "Monteverdi steht genau an dieser stilgeschichtlichen Schwelle. Mit Werken wie L'Orfeo wurde er zu einer Schlüsselfigur der frühen Oper und des Frühbarock."
+    },
+    {
+      question: "Welches Werk gilt als Schlüsselwerk der musikalischen Moderne und wurde 1913 in Paris uraufgeführt?",
+      image: "stravinsky.jpg",
+      options: ["Le Sacre du printemps", "Die Moldau", "Ein deutsches Requiem", "Die vier Jahreszeiten"],
+      correct: 0,
+      explanation: "Le Sacre du printemps von Igor Strawinsky wurde 1913 uraufgeführt und gilt wegen Rhythmik, Harmonik und Klangsprache als ein Schlüsselwerk der Moderne."
+    },
+    {
+      question: "Welche Kombination ist korrekt?",
+      image: "bach.jpg",
+      options: ["Bach – Barock – Matthäus-Passion", "Mozart – Romantik – Boléro", "Verdi – Renaissance – Motette", "Debussy – Barock – Messiah"],
+      correct: 0,
+      explanation: "Johann Sebastian Bach gehört zum Barock, und die Matthäus-Passion ist eines seiner bedeutendsten geistlichen Werke."
+    },
+    {
+      question: "Welche Aussage beschreibt eine Fuge am besten?",
+      image: "bach.jpg",
+      options: ["Ein Thema wird nacheinander in verschiedenen Stimmen imitiert und verarbeitet", "Ein Solo singt eine Opernarie", "Ein Orchester spielt eine Tanzfolge", "Ein Chor singt ohne Text"],
+      correct: 0,
+      explanation: "Die Fuge ist eine kontrapunktische Form. Ein Thema erscheint nacheinander in verschiedenen Stimmen und wird kunstvoll weiterverarbeitet."
+    },
+    {
+      question: "Welche Komponisten gehören zur Zweiten Wiener Schule?",
+      image: "schoenberg.jpg",
+      options: ["Schönberg, Berg und Webern", "Haydn, Mozart und Beethoven", "Bach, Händel und Vivaldi", "Verdi, Puccini und Rossini"],
+      correct: 0,
+      explanation: "Die Zweite Wiener Schule umfasst vor allem Arnold Schönberg, Alban Berg und Anton Webern. Sie ist zentral für Atonalität, Expressionismus und Zwölftontechnik."
+    },
+    {
+      question: "Welche Gattung ist typischerweise konzertant, oft geistlich und nicht szenisch gespielt?",
+      image: "handel.jpg",
+      options: ["Oratorium", "Oper", "Ballett", "Sinfonie"],
+      correct: 0,
+      explanation: "Das Oratorium ist meist ein grosses Werk für Solisten, Chor und Orchester. Im Unterschied zur Oper wird es normalerweise nicht szenisch aufgeführt."
+    },
+    {
+      question: "Welche Zuordnung ist falsch?",
+      image: "ravel.jpg",
+      options: ["Ravel – Renaissance", "Debussy – Impressionismus", "Schönberg – Zwölftontechnik", "Strawinsky – Moderne"],
+      correct: 0,
+      explanation: "Ravel gehört nicht zur Renaissance, sondern zur Musik des späten 19. und frühen 20. Jahrhunderts. Er wird oft im Umfeld von Impressionismus und Moderne genannt."
+    },
+    {
+      question: "Welches Werk gehört besonders zur tschechischen Nationalmusik?",
+      image: "smetana.jpg",
+      options: ["Die Moldau", "Finlandia", "Peer Gynt", "Enigma Variations"],
+      correct: 0,
+      explanation: "Die Moldau von Bedřich Smetana ist Teil des Zyklus Mein Vaterland und wurde zu einem Symbol tschechischer Nationalmusik."
+    },
+    {
+      question: "Welche Aussage zu einem Requiem ist richtig?",
+      image: "verdi.jpg",
+      options: ["Es ist eine musikalische Vertonung der Totenmesse", "Es ist immer eine komische Oper", "Es ist ein Klavierstück ohne Text", "Es ist eine barocke Tanzsuite"],
+      correct: 0,
+      explanation: "Ein Requiem ist eine Vertonung der Totenmesse. Bekannte Requien stammen unter anderem von Mozart, Verdi, Fauré, Brahms in freierer Form und Britten."
+    },
+    {
+      question: "Welche Kombination passt am besten zum Begriff 'sinfonische Dichtung'?",
+      image: "liszt.jpg?v=3",
+      options: ["Programmmusik – Orchester – 19. Jahrhundert", "A-cappella – Messe – Renaissance", "Zwölftonreihe – Barock – Generalbass", "Opera buffa – Fuge – Choral"],
+      correct: 0,
+      explanation: "Die sinfonische Dichtung ist meist ein einsätziges Orchesterwerk mit aussermusikalischem Programm. Franz Liszt prägte diese Gattung im 19. Jahrhundert."
+    }
+  ]
+}
     ];
 
     let currentLevelIndex = 0;
