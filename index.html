@@ -481,6 +481,59 @@
       color: var(--gold);
     }
 
+
+    .about-card {
+      background: rgba(0,0,0,0.14);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 22px;
+      padding: 20px;
+      margin: 24px 0 14px;
+      line-height: 1.5;
+    }
+
+    .about-card h3 {
+      margin: 0 0 10px;
+      text-align: center;
+      font-size: 1.25rem;
+    }
+
+    .about-card p {
+      margin: 0 auto 14px;
+      color: rgba(255,255,255,0.86);
+      text-align: center;
+      max-width: 680px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .about-item {
+      background: rgba(255,255,255,0.11);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 14px;
+      font-size: 0.95rem;
+    }
+
+    .about-item strong {
+      display: block;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .about-small {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.72);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
     .version {
       text-align: center;
       opacity: 0.45;
@@ -560,6 +613,11 @@
         grid-template-columns: 1fr;
       }
 
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
       .composer-image {
         height: 300px;
         max-width: 100%;
@@ -605,11 +663,37 @@
 
      <div class="level-grid" id="levelGrid"></div>
 
+      <div class="about-card">
+        <h3>Über Maestro Quiz</h3>
+        <p>
+          Maestro Quiz ist ein spielerischer Musikgeschichte-Trainer für Klassikfans, Chorsänger:innen,
+          Schüler:innen und angehende Musikstudierende. Die Basisversion verbindet Quiz, Lernziel und kurze
+          Erklärungen nach jeder Antwort.
+        </p>
+        <div class="about-grid">
+          <div class="about-item">
+            <strong>🎓 Lernziel</strong>
+            Grundwissen zu Komponisten, Werken, Epochen, Formen und Kirchenmusik festigen.
+          </div>
+          <div class="about-item">
+            <strong>🎮 Spielprinzip</strong>
+            10 Level mit zufälligen Fragen und Antworten, Bestnoten und direktem Feedback.
+          </div>
+          <div class="about-item">
+            <strong>🚀 Ausblick</strong>
+            Eine erweiterte Lernversion mit 500+ Fragen, Prüfungsmodus, Kategorien und Lernstatistik ist geplant.
+          </div>
+        </div>
+        <div class="about-small">
+          Kostenlose Basisversion · Prototyp 1.x · ideal zum Wiederholen, Ausprobieren und Weiterentwickeln.
+        </div>
+      </div>
+
 <button onclick="resetBestScores()" class="danger-btn">
   Bestnoten zurücksetzen
 </button>
 
-<p class="version">Version 1.4.1 – Button- und Lernpfad-Politur</p>
+<p class="version">Version 1.5 – About & Projektbereich</p>
 </section>
 
 
