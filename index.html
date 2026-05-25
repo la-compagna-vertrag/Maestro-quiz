@@ -226,7 +226,16 @@
       background: rgba(255,255,255,0.16);
       margin-top: 12px;
     }
+.danger-btn {
+  width: 100%;
+  background: rgba(248,113,113,0.22);
+  margin-top: 12px;
+  color: white;
+}
 
+.danger-btn:hover:not(:disabled) {
+  background: rgba(248,113,113,0.34);
+}
     button.correct {
       background: var(--green) !important;
       color: #052e16;
@@ -333,8 +342,11 @@
       </div>
 
       <div class="level-grid" id="levelGrid"></div>
+      <button onclick="resetBestScores()" class="danger-btn">
+  Bestnoten zurücksetzen
+</button>
 
-      <p class="version">Version 3.3 – Fragen und Antworten zufällig gemischt</p>
+      <p class="version">Version 4.1 – Bestnoten zurücksetzen </p>
     </section>
 
     <section id="quizScreen" class="hidden">
