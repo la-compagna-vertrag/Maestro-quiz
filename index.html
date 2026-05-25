@@ -337,6 +337,68 @@
       color: var(--muted);
     }
 
+
+    .result-rank {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-top: 8px;
+      color: var(--gold);
+    }
+
+    .result-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0 14px;
+    }
+
+    .result-stat {
+      background: rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 13px 10px;
+      font-weight: 800;
+    }
+
+    .result-stat span {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .next-suggestion {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: rgba(96,165,250,0.14);
+      border: 1px solid rgba(96,165,250,0.22);
+      border-radius: 16px;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.45;
+    }
+
+    .level-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 12px;
+    }
+
+    .mini-tag {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.13);
+      color: rgba(255,255,255,0.86);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .mini-tag.gold {
+      background: rgba(250,204,21,0.18);
+      color: var(--gold);
+    }
+
     .version {
       text-align: center;
       opacity: 0.45;
@@ -431,7 +493,7 @@
 <body>
   <main class="app">
     <h1>🎼 Maestro Quiz</h1>
-    <p class="subtitle">Musikgeschichte · Werke · Komponisten · Gattungen</p>
+    <p class="subtitle">Der spielerische Musikgeschichte-Trainer für Klassik, Chor & Werkkunde</p>
 
     <section id="levelScreen">
       <div class="center">
@@ -440,17 +502,18 @@
       </div>
 
       <div class="intro-card">
-        Trainiere spielerisch dein Wissen über <strong>Klassik, Oper, Kirchenmusik, Formenlehre und Musikgeschichte</strong>.
-        Nach jeder Antwort bekommst du eine kurze Erklärung — ideal zum Wiederholen, Lernen und neugierig Weiterklicken.
+        Willkommen bei <strong>Maestro Quiz</strong>: Trainiere spielerisch dein Wissen über <strong>Klassik, Oper,
+        Kirchenmusik, Formenlehre und Musikgeschichte</strong>. Nach jeder Antwort bekommst du eine kurze Erklärung —
+        ideal zum Wiederholen, Lernen und neugierig Weiterklicken.
         <div class="pill-row">
-          <div class="pill">10 Level<span>von Einstieg bis Boss</span></div>
-          <div class="pill">100 Fragen<span>mit Erklärtexten</span></div>
-          <div class="pill">Shuffle-Modus<span>jedes Spiel neu</span></div>
+          <div class="pill">10 Level<span>vom Einstieg bis zur Abschluss-Challenge</span></div>
+          <div class="pill">100 Fragen<span>mit Mini-Erklärungen</span></div>
+          <div class="pill">Shuffle-Modus<span>Fragen & Antworten jedes Mal neu</span></div>
         </div>
       </div>
 
       <div class="support-note">
-        Kostenlose Basisversion. Eine erweiterte Lernversion mit zusätzlichen Fragen, Prüfungsmodus und Kategorien ist in Planung.
+        Kostenlose Basisversion. Eine erweiterte Lernversion mit 500+ Fragen, Prüfungsmodus, Kategorien und Lernstatistik ist in Planung.
       </div>
 
      <div class="level-grid" id="levelGrid"></div>
@@ -459,7 +522,7 @@
   Bestnoten zurücksetzen
 </button>
 
-<p class="version">Version 1.1 – Maestro Quiz Prototyp · Basisversion</p>
+<p class="version">Version 1.2 – Motivation & Ergebnisbildschirm optimiert</p>
 </section>
 
 <section id="quizScreen" class="hidden">
@@ -498,8 +561,15 @@
       </div>
 
       <div class="result-box">
+        <div class="result-rank" id="resultRank"></div>
         <div class="score-big" id="scoreText"></div>
+        <div class="result-stats">
+          <div class="result-stat" id="pointsStat">–<span>Punkte</span></div>
+          <div class="result-stat" id="percentStat">–<span>Ergebnis</span></div>
+          <div class="result-stat" id="levelStat">–<span>Level</span></div>
+        </div>
         <p class="result-comment" id="comment"></p>
+        <div class="next-suggestion" id="nextSuggestion"></div>
       </div>
 
       <button onclick="restartCurrentLevel()" class="primary-btn">Dieses Level nochmals spielen</button>
@@ -1322,6 +1392,64 @@
       return shuffleArray(optionsWithCorrectFlag);
     }
 
+
+    function getLevelMeta(id) {
+      const meta = {
+        1: { type: "Einstieg", difficulty: "leicht" },
+        2: { type: "Werkkunde", difficulty: "leicht–mittel" },
+        3: { type: "Stilwissen", difficulty: "mittel" },
+        4: { type: "Oper", difficulty: "mittel" },
+        5: { type: "Romantik", difficulty: "mittel" },
+        6: { type: "Alte Musik", difficulty: "mittel–fortgeschritten" },
+        7: { type: "Moderne", difficulty: "fortgeschritten" },
+        8: { type: "Chor & Kirche", difficulty: "mittel" },
+        9: { type: "Begriffe", difficulty: "mittel–fortgeschritten" },
+        10: { type: "Abschluss", difficulty: "Boss" }
+      };
+
+      return meta[id] || { type: "Training", difficulty: "variabel" };
+    }
+
+    function getResultRank(percentage) {
+      if (percentage === 100) {
+        return {
+          title: "🏆 Maestro-Modus",
+          comment: "Perfekt! Du hast dieses Level souverän abgeschlossen.",
+          suggestion: "Nächstes Ziel: Spiele ein anderes Level — oder wiederhole dieses Level mit neuer Reihenfolge."
+        };
+      }
+
+      if (percentage >= 90) {
+        return {
+          title: "✨ Fast Maestro",
+          comment: "Sehr stark — nur ein kleiner Wackler trennt dich vom perfekten Lauf.",
+          suggestion: "Wiederhole das Level einmal: Durch die Zufallsreihenfolge bleibt es frisch."
+        };
+      }
+
+      if (percentage >= 75) {
+        return {
+          title: "🎯 Solide:r Kenner:in",
+          comment: "Das Fundament sitzt. Jetzt helfen die Erklärtexte beim Feinschliff.",
+          suggestion: "Achte beim nächsten Durchgang besonders auf Begriffe, Gattungen und Epochen-Zuordnungen."
+        };
+      }
+
+      if (percentage >= 50) {
+        return {
+          title: "🕵️ Musikdetektiv:in",
+          comment: "Du bist auf der Spur. Noch ein Durchgang macht aus Vermutungen Wissen.",
+          suggestion: "Lies die Erklärungen bewusst mit — genau dort steckt der Lerngewinn."
+        };
+      }
+
+      return {
+        title: "🌱 Lernmodus",
+        comment: "Alles gut: Dieses Level ist jetzt dein Trainingsfeld.",
+        suggestion: "Starte gleich noch einmal. Schon beim zweiten Durchgang wird vieles vertrauter."
+      };
+    }
+
     function renderLevelScreen() {
       const grid = document.getElementById("levelGrid");
       grid.innerHTML = "";
@@ -1330,12 +1458,17 @@
         const card = document.createElement("div");
         card.className = "level-card" + (level.active ? "" : " locked");
 
+        const meta = getLevelMeta(level.id);
         const best = localStorage.getItem("bestScoreLevel" + level.id);
         const bestText = best ? `<div class="best-score">Beste Punktzahl: ${best}/${level.questions.length}</div>` : "";
 
         card.innerHTML = `
           <div>
             <span class="badge">Level ${level.id}</span>
+            <div class="level-meta">
+              <span class="mini-tag">${meta.type}</span>
+              <span class="mini-tag gold">${meta.difficulty}</span>
+            </div>
             <h3>${level.title}</h3>
             <p>${level.description}</p>
           </div>
@@ -1470,36 +1603,30 @@
       document.getElementById("resultTitle").textContent = level.title;
 
       const percentage = Math.round((score / currentLevelQuestions.length) * 100);
+      const rank = getResultRank(percentage);
 
+      document.getElementById("resultRank").textContent = rank.title;
       document.getElementById("scoreText").textContent = score + "/" + currentLevelQuestions.length;
+      document.getElementById("pointsStat").innerHTML = score + "/" + currentLevelQuestions.length + "<span>Punkte</span>";
+      document.getElementById("percentStat").innerHTML = percentage + "%<span>Ergebnis</span>";
+      document.getElementById("levelStat").innerHTML = "Level " + level.id + "<span>Bereich</span>";
 
       const storageKey = "bestScoreLevel" + level.id;
       const oldBest = Number(localStorage.getItem(storageKey) || 0);
+      const isNewBest = score > oldBest;
 
-      if (score > oldBest) {
+      if (isNewBest) {
         localStorage.setItem(storageKey, score);
       }
 
-      let comment = "";
+      let comment = rank.comment;
 
-      if (percentage === 100) {
-        comment = "🏆 Maestro-Modus! Perfektes Level — das ist sattelfestes Musikwissen.";
-      } else if (percentage >= 80) {
-        comment = "Sehr stark! Du bewegst dich sicher durch Werke, Begriffe und Epochen.";
-      } else if (percentage >= 60) {
-        comment = "Solide Leistung! Die Grundlagen sitzen — jetzt beginnt die Feinarbeit.";
-      } else if (percentage >= 40) {
-        comment = "Guter Anfang. Lies die Erklärungen bewusst mit — dein Score steigt schnell.";
-      } else {
-        comment = "Lernmodus aktiviert: Jede Erklärung ist ein kleiner Baustein. Noch einmal spielen lohnt sich.";
-      }
-
-      if (score > oldBest) {
+      if (isNewBest) {
         comment += " Neue persönliche Bestleistung!";
       }
 
-      document.getElementById("comment").textContent =
-        comment + " Du hast " + percentage + "% erreicht.";
+      document.getElementById("comment").textContent = comment + " Du hast " + percentage + "% erreicht.";
+      document.getElementById("nextSuggestion").textContent = rank.suggestion;
     }
 
     function restartCurrentLevel() {
